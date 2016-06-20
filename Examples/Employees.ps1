@@ -14,6 +14,11 @@ $Metadata = @(@{
     }
 }, @{
     Path = "Employees"
+    Metadata = @(@{
+        Path = "Name"
+    }, @{
+        Path = "Email"
+    })
     Stop = {
         Param([string[]]$Responses, [hashtable]$Tree)
         return $Responses.Length -eq $Tree.Total
