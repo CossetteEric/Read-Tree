@@ -27,4 +27,4 @@ $Metadata = @(@{
     }
 })
 
-Confirm-Responses $Metadata
+Confirm-Tree $Metadata
