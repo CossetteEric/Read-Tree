@@ -9,6 +9,7 @@ function Read-Leaf {
         return
     }
 
+    $Path = $Metadata.Path
     $Alias = if ($Metadata.Alias) {$Metadata.Alias} else {$Metadata.Path}
     $Default = if ($Metadata.Default) {& $Metadata.Default $PastResponses}
     $Description = $Metadata.Description
@@ -39,11 +40,18 @@ function Read-Leaf {
     $Stop = $Metadata.Stop
 
     $Responses = @()
+    $IsFirstIteration = $true
+
     while ($true) {
-        Write-Color $Message
         if ($Metadata.Metadata) {
+            if ($IsFirstIteration) {
+                Write-Color $Message
+                $IsFirstIteration = $false
+            }
+            Write-Color @(@{Value = "$Path[$($Responses.Length)]"; Color = "Yellow"}, "`r`n")
             $Response = Read-Tree $Metadata.Metadata
         } else {
+            Write-Color $Message
             $Response = (Read-Host).Trim()
         }
 
