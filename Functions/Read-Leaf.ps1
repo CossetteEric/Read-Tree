@@ -58,9 +58,9 @@ function Read-Leaf {
         if (!$Response -and $Default) {
             $Response = $Default
         }
-        if (!$Verify -or (& $Verify $Response $PastResponses)) {
+        if (!$Verify -or (& $Verify $Response $PastResponses $Metadata.Arguments)) {
             $Responses += @($Response)
-            if (!$Stop -or (& $Stop $Responses $PastResponses)) {
+            if (!$Stop -or (& $Stop $Responses $PastResponses $Metadata.Arguments)) {
                 break
             }
         }
